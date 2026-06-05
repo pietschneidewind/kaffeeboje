@@ -6,7 +6,7 @@
   <title>kaffeeboje</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -19,15 +19,21 @@
       --red: #f84022;
       --bg: #faf8f5;
       --text: #1a1a1a;
+      --deep: #060e1a;
+      --ocean: #0b1e35;
     }
 
-    html, body {
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       width: 100%;
-      height: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
       background: var(--bg);
       font-family: 'League Spartan', sans-serif;
       color: var(--text);
+      overflow: hidden;
     }
 
     #intro-bg {
@@ -37,10 +43,7 @@
       background: var(--bg);
       transition: opacity 0.8s ease;
     }
-
-    #intro-bg.fade-out {
-      opacity: 0;
-    }
+    #intro-bg.fade-out { opacity: 0; pointer-events: none; }
 
     #logo-wrap {
       position: fixed;
@@ -70,19 +73,24 @@
       opacity: 0;
       transition: opacity 0.8s ease;
     }
-
-    #site.visible {
-      opacity: 1;
-    }
+    #site.visible { opacity: 1; }
 
     .hero {
-      min-height: 100vh;
+      position: relative;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       padding-top: 2rem;
       text-align: center;
+      background: var(--bg);
+    }
+
+    .hero-spacer {
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
     }
 
     .site-title {
@@ -93,10 +101,154 @@
       margin-top: 1.5rem;
     }
 
-    .hero-spacer {
-      width: 160px;
-      height: 160px;
-      flex-shrink: 0;
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      cursor: pointer;
+    }
+    .scroll-hint.visible { opacity: 1; }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      font-weight: 200;
+      letter-spacing: 0.22em;
+      color: var(--text);
+    }
+
+    .scroll-hint svg {
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(5px); }
+    }
+
+    .wave-divider {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      background: var(--bg);
+    }
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+
+    .ocean {
+      background: var(--ocean);
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ocean::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 80%;
+      background: radial-gradient(ellipse at 50% 0%, rgba(100,160,220,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .bubbles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bubble {
+      position: absolute;
+      bottom: -10%;
+      border-radius: 50%;
+      background: rgba(150,200,255,0.08);
+      animation: rise linear infinite;
+    }
+    .bubble:nth-child(1)  { width:4px;  height:4px;  left:12%; animation-duration:14s; animation-delay:0s; }
+    .bubble:nth-child(2)  { width:2px;  height:2px;  left:27%; animation-duration:18s; animation-delay:3s; }
+    .bubble:nth-child(3)  { width:6px;  height:6px;  left:43%; animation-duration:12s; animation-delay:1s; }
+    .bubble:nth-child(4)  { width:3px;  height:3px;  left:61%; animation-duration:20s; animation-delay:5s; }
+    .bubble:nth-child(5)  { width:2px;  height:2px;  left:78%; animation-duration:16s; animation-delay:2s; }
+    .bubble:nth-child(6)  { width:5px;  height:5px;  left:89%; animation-duration:11s; animation-delay:7s; }
+    .bubble:nth-child(7)  { width:3px;  height:3px;  left:35%; animation-duration:22s; animation-delay:4s; }
+    .bubble:nth-child(8)  { width:2px;  height:2px;  left:55%; animation-duration:15s; animation-delay:9s; }
+
+    @keyframes rise {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(-110vh) translateX(20px); opacity: 0; }
+    }
+
+    .ocean::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(to top, rgba(8,20,40,0.9) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .ocean-content {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+    }
+
+    .ocean-label {
+      font-size: 0.65rem;
+      font-weight: 200;
+      letter-spacing: 0.25em;
+      color: rgba(150,200,255,0.5);
+      margin-bottom: 2rem;
+    }
+
+    .ocean-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: rgba(220,235,255,0.92);
+      margin-bottom: 1.8rem;
+    }
+
+    .ocean-text {
+      font-size: 1rem;
+      font-weight: 200;
+      color: rgba(160,200,240,0.6);
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+    }
+
+    .seafloor-line {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 1px;
+      background: rgba(100,160,220,0.2);
+      z-index: 2;
     }
   </style>
 </head>
@@ -118,20 +270,59 @@
   </div>
 
   <div id="site">
-    <div class="hero">
+
+    <section class="hero" id="hero">
       <div class="hero-spacer"></div>
       <span class="site-title">kaffeeboje</span>
+
+      <div class="scroll-hint" id="scroll-hint" onclick="document.getElementById('ocean').scrollIntoView({behavior:'smooth'})">
+        <span>scroll down</span>
+        <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="7" y1="0" x2="7" y2="16" stroke="#1a1a1a" stroke-width="0.8"/>
+          <polyline points="2,11 7,17 12,11" fill="none" stroke="#1a1a1a" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <div class="wave-divider">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C240,80 480,0 720,40 C960,80 1200,20 1440,50 L1440,80 L0,80 Z" fill="#0b1e35"/>
+      </svg>
     </div>
+
+    <section class="ocean" id="ocean">
+      <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+      </div>
+
+      <div class="ocean-content">
+        <p class="ocean-label">am grund des meeres</p>
+        <h2 class="ocean-title">wo der kaffee<br>seine tiefe findet.</h2>
+        <p class="ocean-text">jede bohne hat eine reise hinter sich — von sonnigen hängen über dunkle röstungen bis in deine tasse. wie eine boje, die auf dem wasser treibt, verbinden wir zwei welten.</p>
+      </div>
+
+      <div class="seafloor-line"></div>
+    </section>
+
   </div>
 
   <script>
-    const introBg = document.getElementById('intro-bg');
-    const site    = document.getElementById('site');
+    const introBg  = document.getElementById('intro-bg');
+    const site     = document.getElementById('site');
+    const hint     = document.getElementById('scroll-hint');
 
     setTimeout(() => {
       introBg.classList.add('fade-out');
       site.classList.add('visible');
       document.body.style.overflow = 'auto';
+      setTimeout(() => hint.classList.add('visible'), 600);
     }, 3100);
   </script>
 </body>
