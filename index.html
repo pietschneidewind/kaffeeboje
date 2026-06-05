@@ -75,149 +75,28 @@
       opacity: 1;
     }
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem 3rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--red); }
-
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
       text-align: center;
-      padding: 2rem;
+    }
+
+    .site-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--text);
+      margin-top: 1.5rem;
     }
 
     .hero-spacer {
       width: 160px;
       height: 160px;
-      margin-bottom: 2.5rem;
       flex-shrink: 0;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      color: #666;
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.85rem 2.2rem;
-      background: var(--red);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      border-radius: 2px;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    section {
-      padding: 6rem 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      color: var(--red);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-text {
-      font-size: 1.05rem;
-      font-weight: 300;
-      color: #555;
-      line-height: 1.75;
-      max-width: 600px;
-    }
-
-    .divider { width: 100%; height: 1px; background: #e8e3dc; }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e8e3dc;
-      padding: 2rem;
-      border-radius: 4px;
-    }
-
-    .card-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--red);
-      border-radius: 2px;
-      margin-bottom: 1.2rem;
-    }
-
-    .card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
-    .card p { font-size: 0.9rem; color: #777; line-height: 1.6; font-weight: 300; }
-
-    footer {
-      border-top: 1px solid #e8e3dc;
-      padding: 2.5rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: #aaa;
     }
   </style>
 </head>
@@ -239,48 +118,10 @@
   </div>
 
   <div id="site">
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#">über uns</a></li>
-        <li><a href="#">kaffee</a></li>
-        <li><a href="#">kontakt</a></li>
-      </ul>
-    </nav>
-
-    <main>
-      <div class="hero">
-        <div class="hero-spacer"></div>
-        <h1>kaffeeboje</h1>
-        <p>specialty coffee, mit liebe geröstet und direkt zu dir nach hause geliefert.</p>
-        <a href="#" class="btn">kaffee entdecken</a>
-      </div>
-
-      <div class="divider"></div>
-
-      <section>
-        <p class="section-label">über uns</p>
-        <h2 class="section-title">mehr als nur kaffee</h2>
-        <p class="section-text">wir glauben daran, dass guter kaffee eine geschichte erzählt — von den farmen, den menschen dahinter und dem handwerk, das jede tasse einzigartig macht.</p>
-        <div class="cards">
-          <div class="card"><div class="card-icon"></div><h3>single origin</h3><p>direktimport von ausgewählten farmen weltweit — transparent und fair gehandelt.</p></div>
-          <div class="card"><div class="card-icon"></div><h3>frisch geröstet</h3><p>jede bestellung wird frisch für dich geröstet und innerhalb von 24 stunden versandt.</p></div>
-          <div class="card"><div class="card-icon"></div><h3>nachhaltig</h3><p>klimaneutrale lieferung, kompostierbare verpackung und faire partnerschaften.</p></div>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <section>
-        <p class="section-label">kontakt</p>
-        <h2 class="section-title">lass uns reden</h2>
-        <p class="section-text">fragen, kooperationen oder einfach ein gutes gespräch über kaffee — wir freuen uns von dir zu hören.</p>
-      </section>
-    </main>
-
-    <footer>
-      <span>© 2025 kaffeeboje</span>
-      <span>mit ♥ geröstet</span>
-    </footer>
+    <div class="hero">
+      <div class="hero-spacer"></div>
+      <span class="site-title">kaffeeboje</span>
+    </div>
   </div>
 
   <script>
