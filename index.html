@@ -20,7 +20,6 @@
       --bg: #faf8f5;
       --text: #1a1a1a;
       --ocean: #0b1e35;
-      --deep: #060e1a;
     }
 
     html { scroll-behavior: smooth; }
@@ -67,10 +66,7 @@
       100% { transform: scale(1); }
     }
 
-    #site {
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
+    #site { opacity: 0; transition: opacity 0.8s ease; }
     #site.visible { opacity: 1; }
 
     .hero {
@@ -82,15 +78,11 @@
       justify-content: flex-start;
       padding-top: 2rem;
       text-align: center;
-      background: var(--bg);
+      background: linear-gradient(to bottom, var(--bg) 60%, #0b1e35 100%);
       overflow: hidden;
     }
 
-    .hero-spacer {
-      width: 160px;
-      height: 160px;
-      flex-shrink: 0;
-    }
+    .hero-spacer { width: 160px; height: 160px; flex-shrink: 0; }
 
     .site-title {
       font-size: 0.95rem;
@@ -134,62 +126,34 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 180px;
+      height: 160px;
       overflow: hidden;
       z-index: 8;
     }
 
-    .water-surface .sky-fade {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 0%, rgba(11,30,53,0.15) 60%, rgba(11,30,53,0.55) 100%);
-      z-index: 1;
-    }
-
-    .wave-layer {
-      position: absolute;
-      bottom: 0;
-      left: -100%;
-      width: 300%;
-      z-index: 2;
-    }
-    .wave-layer svg { display: block; width: 100%; }
-
-    .wave-layer-1 {
-      animation: waveScroll 8s linear infinite;
-      opacity: 0.9;
-    }
-    .wave-layer-2 {
-      animation: waveScroll 12s linear infinite reverse;
-      opacity: 0.6;
-      bottom: -4px;
-    }
-    .wave-layer-3 {
-      animation: waveScroll 6s linear infinite;
-      opacity: 0.35;
-      bottom: 2px;
-    }
-
-    @keyframes waveScroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(33.33%); }
-    }
-
-    .water-fill {
+    .wave-track {
       position: absolute;
       bottom: 0;
       left: 0;
-      right: 0;
-      height: 60px;
-      background: var(--ocean);
-      z-index: 3;
+      width: 200%;
+      will-change: transform;
+    }
+    .wave-track svg { display: block; width: 100%; }
+
+    .wave-track-1 { animation: waveMove 8s linear infinite; }
+    .wave-track-2 { animation: waveMove 13s linear infinite reverse; bottom: 4px; opacity: 0.65; }
+    .wave-track-3 { animation: waveMove 5s linear infinite; bottom: 8px; opacity: 0.4; }
+
+    @keyframes waveMove {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
     .ocean {
       background: linear-gradient(to bottom,
-        var(--ocean) 0%,
-        #081629 40%,
-        #060f1e 75%,
+        #0b1e35 0%,
+        #081629 35%,
+        #060f1e 65%,
         #040c18 100%
       );
       position: relative;
@@ -205,14 +169,12 @@
 
     .light-shaft {
       position: absolute;
-      top: 0;
-      left: 50%;
+      top: 0; left: 50%;
       transform: translateX(-50%);
-      width: 60%;
-      height: 55%;
+      width: 70%; height: 60%;
       background: radial-gradient(ellipse at 50% 0%,
-        rgba(120,180,255,0.06) 0%,
-        rgba(80,140,220,0.03) 40%,
+        rgba(120,180,255,0.07) 0%,
+        rgba(80,140,220,0.03) 45%,
         transparent 70%
       );
       pointer-events: none;
@@ -227,33 +189,36 @@
     }
     .bubble {
       position: absolute;
-      bottom: 20%;
+      bottom: 15%;
       border-radius: 50%;
-      border: 1px solid rgba(160,210,255,0.25);
-      background: rgba(140,195,255,0.06);
+      border: 1px solid rgba(160,210,255,0.3);
+      background: rgba(140,195,255,0.07);
       animation: rise linear infinite;
     }
-    .bubble:nth-child(1)  { width:8px;  height:8px;  left:8%;  animation-duration:13s; animation-delay:0s; }
-    .bubble:nth-child(2)  { width:4px;  height:4px;  left:16%; animation-duration:18s; animation-delay:2s; }
-    .bubble:nth-child(3)  { width:12px; height:12px; left:24%; animation-duration:11s; animation-delay:1s; }
-    .bubble:nth-child(4)  { width:5px;  height:5px;  left:33%; animation-duration:20s; animation-delay:5s; }
-    .bubble:nth-child(5)  { width:9px;  height:9px;  left:41%; animation-duration:14s; animation-delay:3s; }
-    .bubble:nth-child(6)  { width:3px;  height:3px;  left:50%; animation-duration:16s; animation-delay:0.5s; }
-    .bubble:nth-child(7)  { width:7px;  height:7px;  left:58%; animation-duration:10s; animation-delay:7s; }
-    .bubble:nth-child(8)  { width:11px; height:11px; left:66%; animation-duration:22s; animation-delay:4s; }
-    .bubble:nth-child(9)  { width:4px;  height:4px;  left:74%; animation-duration:15s; animation-delay:1.5s; }
-    .bubble:nth-child(10) { width:6px;  height:6px;  left:82%; animation-duration:12s; animation-delay:8s; }
-    .bubble:nth-child(11) { width:3px;  height:3px;  left:90%; animation-duration:19s; animation-delay:3s; }
-    .bubble:nth-child(12) { width:8px;  height:8px;  left:96%; animation-duration:9s;  animation-delay:6s; }
-    .bubble:nth-child(13) { width:5px;  height:5px;  left:4%;  animation-duration:17s; animation-delay:9s; }
-    .bubble:nth-child(14) { width:10px; height:10px; left:45%; animation-duration:13s; animation-delay:11s; }
-    .bubble:nth-child(15) { width:4px;  height:4px;  left:71%; animation-duration:21s; animation-delay:2s; }
+    .bubble:nth-child(1)  { width:9px;  height:9px;  left:7%;  animation-duration:13s; animation-delay:0s;   }
+    .bubble:nth-child(2)  { width:4px;  height:4px;  left:15%; animation-duration:18s; animation-delay:2s;   }
+    .bubble:nth-child(3)  { width:13px; height:13px; left:23%; animation-duration:11s; animation-delay:1s;   }
+    .bubble:nth-child(4)  { width:5px;  height:5px;  left:32%; animation-duration:20s; animation-delay:5s;   }
+    .bubble:nth-child(5)  { width:10px; height:10px; left:40%; animation-duration:14s; animation-delay:3s;   }
+    .bubble:nth-child(6)  { width:3px;  height:3px;  left:49%; animation-duration:16s; animation-delay:0.5s; }
+    .bubble:nth-child(7)  { width:8px;  height:8px;  left:57%; animation-duration:10s; animation-delay:7s;   }
+    .bubble:nth-child(8)  { width:12px; height:12px; left:65%; animation-duration:22s; animation-delay:4s;   }
+    .bubble:nth-child(9)  { width:4px;  height:4px;  left:73%; animation-duration:15s; animation-delay:1.5s; }
+    .bubble:nth-child(10) { width:7px;  height:7px;  left:81%; animation-duration:12s; animation-delay:8s;   }
+    .bubble:nth-child(11) { width:3px;  height:3px;  left:89%; animation-duration:19s; animation-delay:3s;   }
+    .bubble:nth-child(12) { width:9px;  height:9px;  left:95%; animation-duration:9s;  animation-delay:6s;   }
+    .bubble:nth-child(13) { width:5px;  height:5px;  left:3%;  animation-duration:17s; animation-delay:9s;   }
+    .bubble:nth-child(14) { width:11px; height:11px; left:44%; animation-duration:13s; animation-delay:11s;  }
+    .bubble:nth-child(15) { width:4px;  height:4px;  left:70%; animation-duration:21s; animation-delay:2s;   }
+    .bubble:nth-child(16) { width:6px;  height:6px;  left:27%; animation-duration:24s; animation-delay:13s;  }
+    .bubble:nth-child(17) { width:8px;  height:8px;  left:55%; animation-duration:11s; animation-delay:15s;  }
+    .bubble:nth-child(18) { width:3px;  height:3px;  left:85%; animation-duration:16s; animation-delay:4s;   }
 
     @keyframes rise {
-      0%   { transform: translateY(0) translateX(0);    opacity: 0; }
+      0%   { transform: translateY(0) translateX(0);      opacity: 0; }
       5%   { opacity: 1; }
-      85%  { opacity: 0.7; }
-      100% { transform: translateY(-100vh) translateX(12px); opacity: 0; }
+      85%  { opacity: 0.75; }
+      100% { transform: translateY(-100vh) translateX(14px); opacity: 0; }
     }
 
     .ocean-content {
@@ -262,7 +227,6 @@
       max-width: 560px;
       margin-bottom: 4rem;
     }
-
     .ocean-label {
       font-size: 0.65rem;
       font-weight: 200;
@@ -270,16 +234,13 @@
       color: rgba(150,200,255,0.45);
       margin-bottom: 2rem;
     }
-
     .ocean-title {
       font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 300;
-      letter-spacing: -0.01em;
       line-height: 1.1;
       color: rgba(220,235,255,0.9);
       margin-bottom: 1.8rem;
     }
-
     .ocean-text {
       font-size: 1rem;
       font-weight: 200;
@@ -296,24 +257,15 @@
     }
 
     .seafloor-approach {
-      height: 120px;
-      background: linear-gradient(to bottom, transparent, rgba(3,8,18,0.85));
+      height: 140px;
+      background: linear-gradient(to bottom, transparent, #030810);
     }
 
     .seafloor-base {
       position: relative;
-      height: 200px;
-      background: #08111e;
+      height: 220px;
+      background: #030810;
       overflow: hidden;
-    }
-
-    .seafloor-base::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 30% at 50% 100%, #1a2d1a 0%, transparent 70%),
-        linear-gradient(to bottom, #0d1f14 0%, #0a1810 30%, #091510 100%);
     }
 
     .seafloor-base::after {
@@ -321,11 +273,11 @@
       position: absolute;
       inset: 0;
       background: repeating-linear-gradient(
-        92deg,
+        88deg,
         transparent 0px,
-        transparent 18px,
-        rgba(30,60,30,0.15) 19px,
-        transparent 20px
+        transparent 22px,
+        rgba(255,255,255,0.015) 23px,
+        transparent 24px
       );
     }
 
@@ -334,6 +286,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
+      height: 100%;
       z-index: 2;
     }
 
@@ -341,63 +294,76 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 100px;
-      z-index: 3;
+      height: 110px;
+      z-index: 4;
     }
-
     .grass-blade {
       position: absolute;
       bottom: 0;
-      width: 2px;
       transform-origin: bottom center;
-      animation: sway 3s ease-in-out infinite;
-      border-radius: 2px 2px 0 0;
+      animation: sway ease-in-out infinite;
+      border-radius: 1px 1px 0 0;
     }
-
     @keyframes sway {
-      0%, 100% { transform: rotate(-8deg) scaleY(1); }
-      50%       { transform: rotate(8deg)  scaleY(0.97); }
+      0%, 100% { transform: rotate(-7deg); }
+      50%       { transform: rotate(7deg); }
     }
 
-    .anchor-point {
+    .kelp-layer {
       position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
     }
 
-    .anchor-ring {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 1px solid rgba(100,160,100,0.4);
+    .kelp-stalk {
+      position: absolute;
+      bottom: 0;
+      transform-origin: bottom center;
+      animation: kelpSway ease-in-out infinite;
     }
-
-    .anchor-label {
-      font-size: 0.55rem;
-      font-weight: 200;
-      letter-spacing: 0.2em;
-      color: rgba(100,160,100,0.35);
+    @keyframes kelpSway {
+      0%, 100% { transform: rotate(-5deg) scaleY(1); }
+      50%       { transform: rotate(5deg)  scaleY(0.98); }
     }
 
     .mote {
       position: absolute;
       border-radius: 50%;
-      background: rgba(160,210,160,0.12);
+      background: rgba(180,220,255,0.1);
       animation: drift linear infinite;
       pointer-events: none;
     }
-
     @keyframes drift {
       0%   { transform: translate(0, 0); opacity: 0; }
-      20%  { opacity: 1; }
-      80%  { opacity: 0.5; }
-      100% { transform: translate(30px, -80px); opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 0.4; }
+      100% { transform: translate(25px, -90px); opacity: 0; }
+    }
+
+    .anchor-point {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .anchor-ring {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(120,180,120,0.35);
+    }
+    .anchor-label {
+      font-size: 0.5rem;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      color: rgba(120,180,120,0.3);
     }
   </style>
 </head>
@@ -425,32 +391,32 @@
       <div class="hero-spacer"></div>
       <span class="site-title">kaffeeboje</span>
 
-      <div class="scroll-hint" id="scroll-hint" onclick="document.getElementById('ocean').scrollIntoView({behavior:'smooth'})">
+      <div class="scroll-hint" id="scroll-hint"
+           onclick="document.getElementById('ocean').scrollIntoView({behavior:'smooth'})">
         <span>scroll down</span>
         <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="7" y1="0" x2="7" y2="16" stroke="#1a1a1a" stroke-width="0.8"/>
-          <polyline points="2,11 7,17 12,11" fill="none" stroke="#1a1a1a" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+          <polyline points="2,11 7,17 12,11" fill="none" stroke="#1a1a1a" stroke-width="0.8"
+                    stroke-linejoin="round" stroke-linecap="round"/>
         </svg>
       </div>
 
       <div class="water-surface">
-        <div class="sky-fade"></div>
-        <div class="wave-layer wave-layer-1">
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,40 C120,10 240,70 360,40 C480,10 600,65 720,38 C840,11 960,62 1080,38 C1200,14 1320,58 1440,40 L1440,80 L0,80 Z" fill="#0b1e35"/>
+        <div class="wave-track wave-track-1">
+          <svg viewBox="0 0 2880 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,42 C80,18 160,66 240,42 C320,18 400,64 480,40 C560,16 640,62 720,38 C800,14 880,60 960,36 C1040,12 1120,58 1200,38 C1280,18 1360,62 1440,40 C1520,18 1600,66 1680,42 C1760,18 1840,64 1920,40 C2000,16 2080,62 2160,38 C2240,14 2320,60 2400,36 C2480,12 2560,58 2640,38 C2720,18 2800,62 2880,40 L2880,80 L0,80 Z" fill="#0b1e35"/>
           </svg>
         </div>
-        <div class="wave-layer wave-layer-2">
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,50 C180,20 360,68 540,44 C720,20 900,60 1080,42 C1260,24 1380,55 1440,48 L1440,80 L0,80 Z" fill="#0d2240" opacity="0.85"/>
+        <div class="wave-track wave-track-2">
+          <svg viewBox="0 0 2880 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,52 C100,28 200,70 300,48 C400,26 500,68 600,46 C700,24 800,66 900,44 C1000,22 1100,64 1200,44 C1300,24 1400,68 1440,50 C1540,28 1640,70 1740,48 C1840,26 1940,68 2040,46 C2140,24 2240,66 2340,44 C2440,22 2540,64 2640,44 C2740,24 2840,68 2880,50 L2880,80 L0,80 Z" fill="#0d2240" opacity="0.8"/>
           </svg>
         </div>
-        <div class="wave-layer wave-layer-3">
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,55 C200,35 400,72 600,50 C800,28 1000,65 1200,48 C1320,38 1400,52 1440,50 L1440,80 L0,80 Z" fill="#122844" opacity="0.6"/>
+        <div class="wave-track wave-track-3">
+          <svg viewBox="0 0 2880 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,58 C120,38 240,72 360,54 C480,36 600,70 720,52 C840,34 960,68 1080,50 C1200,32 1320,66 1440,52 C1560,38 1680,72 1800,54 C1920,36 2040,70 2160,52 C2280,34 2400,68 2520,50 C2640,32 2760,66 2880,52 L2880,80 L0,80 Z" fill="#122844" opacity="0.5"/>
           </svg>
         </div>
-        <div class="water-fill"></div>
       </div>
     </section>
 
@@ -458,22 +424,13 @@
 
       <div class="light-shaft"></div>
 
-      <div class="bubbles" id="bubbles">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+      <div class="bubbles">
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
       </div>
 
       <div class="ocean-content">
@@ -484,39 +441,60 @@
 
       <div class="seafloor">
         <div class="seafloor-approach"></div>
-        <div class="seafloor-base">
-          <svg class="seafloor-svg" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="120"  cy="185" rx="90"  ry="28" fill="#0a1a0a" opacity="0.7"/>
-            <ellipse cx="340"  cy="190" rx="60"  ry="20" fill="#091608" opacity="0.6"/>
-            <ellipse cx="580"  cy="183" rx="110" ry="32" fill="#0b1c0b" opacity="0.75"/>
-            <ellipse cx="820"  cy="188" rx="75"  ry="22" fill="#091508" opacity="0.6"/>
-            <ellipse cx="1060" cy="184" rx="95"  ry="30" fill="#0a1a0a" opacity="0.7"/>
-            <ellipse cx="1300" cy="189" rx="65"  ry="21" fill="#091608" opacity="0.6"/>
-            <ellipse cx="1420" cy="186" rx="50"  ry="18" fill="#0a1a0a" opacity="0.5"/>
-            <path d="M60,200 Q80,155 110,160 Q145,155 160,200 Z" fill="#0d2010"/>
-            <path d="M200,200 Q225,165 255,170 Q280,165 295,200 Z" fill="#0c1e0f"/>
-            <path d="M430,200 Q460,150 500,158 Q535,152 550,200 Z" fill="#0d2010"/>
-            <path d="M650,200 Q668,162 690,165 Q715,160 730,200 Z" fill="#0c1e0f"/>
-            <path d="M870,200 Q900,148 940,155 Q978,150 995,200 Z" fill="#0d2010"/>
-            <path d="M1100,200 Q1120,158 1145,162 Q1168,157 1180,200 Z" fill="#0c1e0f"/>
-            <path d="M1320,200 Q1348,160 1375,165 Q1400,160 1410,200 Z" fill="#0d2010"/>
-            <path d="M0,200 Q30,130 80,140 Q130,132 155,200 Z" fill="#112214"/>
-            <path d="M310,200 Q350,125 410,135 Q465,127 490,200 Z" fill="#112214"/>
-            <path d="M720,200 Q755,128 810,138 Q860,130 880,200 Z" fill="#122315"/>
-            <path d="M1000,200 Q1040,132 1095,140 Q1145,133 1165,200 Z" fill="#112214"/>
-            <path d="M1380,200 Q1400,140 1440,145 L1440,200 Z" fill="#112214"/>
-            <path d="M0,198 Q180,192 360,197 Q540,202 720,196 Q900,190 1080,197 Q1260,203 1440,196 L1440,200 L0,200 Z" fill="#0f2011" opacity="0.8"/>
+        <div class="seafloor-base" id="seafloor-base">
+
+          <svg class="seafloor-svg" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice"
+               xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="160" width="1440" height="60" fill="#020508"/>
+            <ellipse cx="0"    cy="210" rx="80"  ry="22" fill="#1a0f08" opacity="0.8"/>
+            <ellipse cx="130"  cy="208" rx="100" ry="28" fill="#150c06" opacity="0.85"/>
+            <ellipse cx="310"  cy="212" rx="70"  ry="20" fill="#1c1008" opacity="0.7"/>
+            <ellipse cx="480"  cy="207" rx="120" ry="32" fill="#170e07" opacity="0.85"/>
+            <ellipse cx="680"  cy="210" rx="85"  ry="24" fill="#130b05" opacity="0.8"/>
+            <ellipse cx="850"  cy="208" rx="110" ry="28" fill="#1a0f08" opacity="0.75"/>
+            <ellipse cx="1040" cy="211" rx="90"  ry="26" fill="#160d06" opacity="0.8"/>
+            <ellipse cx="1210" cy="209" rx="100" ry="28" fill="#1c1008" opacity="0.75"/>
+            <ellipse cx="1380" cy="208" rx="80"  ry="22" fill="#150c06" opacity="0.8"/>
+            <ellipse cx="1440" cy="210" rx="70"  ry="20" fill="#1a0f08" opacity="0.7"/>
+            <path d="M0,220    Q20,178 55,185  Q90,178  110,220 Z" fill="#221208"/>
+            <path d="M85,220   Q115,170 155,178 Q195,170 215,220 Z" fill="#1e1007"/>
+            <path d="M220,220  Q245,180 275,186 Q305,180 320,220 Z" fill="#231308"/>
+            <path d="M370,220  Q405,172 450,180 Q490,172 510,220 Z" fill="#1f1007"/>
+            <path d="M530,220  Q555,176 585,182 Q615,176 630,220 Z" fill="#221208"/>
+            <path d="M680,220  Q710,170 755,178 Q798,170 815,220 Z" fill="#201108"/>
+            <path d="M840,220  Q862,174 890,180 Q918,174 932,220 Z" fill="#231308"/>
+            <path d="M980,220  Q1010,168 1055,176 Q1098,168 1115,220 Z" fill="#1e1007"/>
+            <path d="M1140,220 Q1165,172 1195,180 Q1224,172 1238,220 Z" fill="#221208"/>
+            <path d="M1280,220 Q1308,170 1350,178 Q1390,170 1408,220 Z" fill="#1f1007"/>
+            <path d="M1415,220 Q1430,178 1440,182 L1440,220 Z"         fill="#221208"/>
+            <path d="M0,220    Q25,140  70,150  Q118,140 140,220 Z" fill="#2a1509"/>
+            <path d="M120,220  Q158,148 210,156 Q260,148 280,220 Z" fill="#261309"/>
+            <path d="M340,220  Q385,138 445,148 Q500,138 520,220 Z" fill="#2c1609"/>
+            <path d="M580,220  Q618,142 668,150 Q715,142 732,220 Z" fill="#271409"/>
+            <path d="M790,220  Q832,136 895,146 Q952,136 972,220 Z" fill="#2a1509"/>
+            <path d="M1020,220 Q1058,140 1112,150 Q1162,140 1178,220 Z" fill="#261309"/>
+            <path d="M1240,220 Q1278,138 1332,148 Q1382,138 1398,220 Z" fill="#2c1609"/>
+            <path d="M1400,220 Q1420,145 1440,150 L1440,220 Z"         fill="#2a1509"/>
+            <ellipse cx="195"  cy="217" rx="18" ry="8"  fill="#1d0f07" opacity="0.9"/>
+            <ellipse cx="430"  cy="218" rx="14" ry="7"  fill="#231208" opacity="0.85"/>
+            <ellipse cx="635"  cy="216" rx="22" ry="9"  fill="#1c0e06" opacity="0.9"/>
+            <ellipse cx="900"  cy="217" rx="16" ry="7"  fill="#201108" opacity="0.85"/>
+            <ellipse cx="1090" cy="218" rx="20" ry="8"  fill="#1d0f07" opacity="0.9"/>
+            <ellipse cx="1320" cy="216" rx="15" ry="7"  fill="#231208" opacity="0.85"/>
           </svg>
+
+          <div class="kelp-layer" id="kelp-layer"></div>
           <div class="seagrass" id="seagrass"></div>
+
           <div class="anchor-point">
             <div class="anchor-ring"></div>
             <span class="anchor-label">verankerung</span>
           </div>
+
         </div>
       </div>
 
     </section>
-
   </div>
 
   <script>
@@ -531,36 +509,85 @@
       setTimeout(() => hint.classList.add('visible'), 600);
     }, 3100);
 
-    const seagrass = document.getElementById('seagrass');
-    const bladeColors = ['#1a3d1a','#162e14','#1e4a1c','#153012'];
-    for (let i = 0; i < 60; i++) {
+    const seagrass    = document.getElementById('seagrass');
+    const grassColors = ['#1a3d1a','#163514','#1e4a1c','#15340f','#224a1a'];
+    for (let i = 0; i < 70; i++) {
       const el = document.createElement('div');
       el.className = 'grass-blade';
-      const h = 30 + Math.random() * 55;
+      const h = 28 + Math.random() * 52;
       el.style.cssText = `
-        left: ${Math.random() * 100}%;
-        height: ${h}px;
-        background: ${bladeColors[Math.floor(Math.random() * bladeColors.length)]};
-        animation-delay: ${Math.random() * 3}s;
-        animation-duration: ${2.5 + Math.random() * 2}s;
-        opacity: ${0.5 + Math.random() * 0.5};
-        width: ${1 + Math.random() * 2}px;
+        left:${Math.random()*100}%;
+        height:${h}px;
+        width:${1+Math.random()*1.5}px;
+        background:${grassColors[Math.floor(Math.random()*grassColors.length)]};
+        animation-delay:${Math.random()*3}s;
+        animation-duration:${2.2+Math.random()*2.2}s;
+        opacity:${0.5+Math.random()*0.5};
       `;
       seagrass.appendChild(el);
     }
 
+    const kelpLayer = document.getElementById('kelp-layer');
+    const kelpData = [
+      { l:5,   h:160, c:'#1a4a18', d:0,   dur:4.5, b:5 },
+      { l:12,  h:120, c:'#22601e', d:1.2, dur:3.8, b:4 },
+      { l:22,  h:180, c:'#184016', d:0.5, dur:5.2, b:6 },
+      { l:35,  h:100, c:'#1e5420', d:2,   dur:3.5, b:3 },
+      { l:48,  h:150, c:'#165a14', d:0.8, dur:4.8, b:5 },
+      { l:58,  h:190, c:'#204e1c', d:1.5, dur:5.5, b:6 },
+      { l:68,  h:130, c:'#1c4818', d:0.3, dur:4.0, b:4 },
+      { l:78,  h:170, c:'#185414', d:2.2, dur:4.6, b:5 },
+      { l:88,  h:110, c:'#22581e', d:0.7, dur:3.6, b:3 },
+      { l:94,  h:145, c:'#1a4a18', d:1.8, dur:5.0, b:4 },
+    ];
+
+    kelpData.forEach(k => {
+      const wrap = document.createElement('div');
+      wrap.className = 'kelp-stalk';
+      wrap.style.cssText = `left:${k.l}%;height:${k.h}px;animation-delay:${k.d}s;animation-duration:${k.dur}s;width:3px;`;
+
+      const ns  = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('width', '60');
+      svg.setAttribute('height', String(k.h));
+      svg.setAttribute('viewBox', `0 0 60 ${k.h}`);
+      svg.style.overflow = 'visible';
+
+      const stalk = document.createElementNS(ns, 'path');
+      stalk.setAttribute('d', `M30,${k.h} Q28,${k.h*0.6} 30,${k.h*0.3} Q32,${k.h*0.1} 30,0`);
+      stalk.setAttribute('stroke', k.c);
+      stalk.setAttribute('stroke-width', '2.5');
+      stalk.setAttribute('fill', 'none');
+      stalk.setAttribute('opacity', '0.85');
+      svg.appendChild(stalk);
+
+      for (let i = 0; i < k.b; i++) {
+        const t    = (i + 1) / (k.b + 1);
+        const y    = k.h * (1 - t * 0.85);
+        const side = i % 2 === 0 ? 1 : -1;
+        const lw   = 18 + Math.random() * 20;
+        const lh   = 10 + Math.random() * 8;
+        const leaf = document.createElementNS(ns, 'ellipse');
+        leaf.setAttribute('cx', String(30 + side * (lw * 0.55)));
+        leaf.setAttribute('cy', String(y));
+        leaf.setAttribute('rx', String(lw));
+        leaf.setAttribute('ry', String(lh * 0.45));
+        leaf.setAttribute('fill', k.c);
+        leaf.setAttribute('opacity', String(0.55 + Math.random() * 0.3));
+        leaf.setAttribute('transform', `rotate(${side*(15+Math.random()*20)} 30 ${y})`);
+        svg.appendChild(leaf);
+      }
+
+      wrap.appendChild(svg);
+      kelpLayer.appendChild(wrap);
+    });
+
     const ocean = document.getElementById('ocean');
-    for (let i = 0; i < 20; i++) {
-      const m = document.createElement('div');
+    for (let i = 0; i < 25; i++) {
+      const m    = document.createElement('div');
       m.className = 'mote';
-      const size = 1 + Math.random() * 3;
-      m.style.cssText = `
-        width: ${size}px; height: ${size}px;
-        left: ${Math.random() * 100}%;
-        bottom: ${5 + Math.random() * 25}%;
-        animation-duration: ${6 + Math.random() * 10}s;
-        animation-delay: ${Math.random() * 8}s;
-      `;
+      const size  = 1 + Math.random() * 2.5;
+      m.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;bottom:${4+Math.random()*30}%;animation-duration:${5+Math.random()*12}s;animation-delay:${Math.random()*10}s;`;
       ocean.appendChild(m);
     }
   </script>
